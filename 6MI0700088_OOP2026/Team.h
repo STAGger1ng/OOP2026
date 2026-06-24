@@ -35,6 +35,8 @@ public:
 	const std::string& getStadium() const;
 	double getBudget() const;
     const std::vector<Player>& getPlayers() const;
+    const Player& getPlayerAtIndex( const unsigned index) const;
+    Player* getPlayerAtIndex(const unsigned index);
     const TeamStats& getStats() const;
 
     void setName( const std::string& name);

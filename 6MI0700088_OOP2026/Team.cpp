@@ -56,6 +56,16 @@ const std::vector<Player>& Team::getPlayers() const
 	return players;
 }
 
+const Player& Team::getPlayerAtIndex(const unsigned index) const
+{
+	return players[index];
+}
+
+Player* Team::getPlayerAtIndex(const unsigned index)
+{
+	return &players[index];
+}
+
 const TeamStats& Team::getStats() const
 {
 	return stats;
