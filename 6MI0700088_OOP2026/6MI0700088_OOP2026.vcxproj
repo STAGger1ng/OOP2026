@@ -141,8 +141,10 @@
   <ItemGroup>
     <ClCompile Include="6MI0700088_OOP2026.cpp" />
     <ClCompile Include="BalancedTeam.cpp" />
+    <ClCompile Include="Championship.cpp" />
     <ClCompile Include="DefensiveTeam.cpp" />
     <ClCompile Include="Lineup.cpp" />
+    <ClCompile Include="Match.cpp" />
     <ClCompile Include="OffensiveTeam.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Team.cpp" />
@@ -150,8 +152,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BalancedTeam.h" />
+    <ClInclude Include="Championship.h" />
     <ClInclude Include="DefensiveTeam.h" />
     <ClInclude Include="Lineup.h" />
+    <ClInclude Include="Match.h" />
     <ClInclude Include="OffensiveTeam.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Position.h" />

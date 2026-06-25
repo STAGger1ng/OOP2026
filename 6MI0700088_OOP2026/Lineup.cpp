@@ -29,21 +29,18 @@ bool Lineup::canAddPlayer(const Player* player)
 		{
 			return false;
 		}
-		if (isValidLineupWithPlayer(player))
-		{
-			return true;
-		}
+		
 	}
-    return false;
+	return isValidLineupWithPlayer(player);
 }
 
 bool Lineup::addPlayer(const std::string& playerFirstName, const std::string& playerLastName)
 {
 	for (int i = 0; i < team.getPlayers().size(); ++i)
 	{
-		if (team.getPlayers()[i].getFirstName() == playerFirstName && team.getPlayers()[i].getLastName() == playerLastName)
+		if (team.getPlayerAtIndex(i)->getFirstName() == playerFirstName && team.getPlayerAtIndex(i)->getLastName() == playerLastName)
 		{
-			if (canAddPlayer(&team.getPlayers()[i]))
+			if (canAddPlayer(team.getPlayerAtIndex(i)))
 			{
 				chosenPlayers.push_back(team.getPlayerAtIndex(i));
 				return true;
@@ -110,9 +107,14 @@ bool Lineup::isValidLineup() const
 
 void Lineup::autoIncludeLowMatchPlayers(bool lastThreeRounds)
 {
+	if (!lastThreeRounds)
+	{
+		return;
+	}
+
 	for (int i = 0; i < team.getPlayers().size(); ++i)
 	{
-		if (team.getPlayerAtIndex(i)->getMatches() < 3)
+		if (team.getPlayerAtIndex(i)->getMatches() > 3)
 		{
 			addPlayer(team.getPlayerAtIndex(i)->getFirstName(), team.getPlayerAtIndex(i)->getLastName());
 		}
@@ -121,9 +123,9 @@ void Lineup::autoIncludeLowMatchPlayers(bool lastThreeRounds)
 
 void Lineup::updateStatsAfterMatch()
 {
-	for (int i = 0; i < chosenPlayers.size(); ++i)
+	for (int i = 0; i < static_cast<int>(chosenPlayers.size()); ++i)
 	{
-		team.getPlayerAtIndex(i)
+		chosenPlayers[i]->playMatch();
 	}
 
 }
