@@ -28,7 +28,7 @@ const int Team::findPlayerByNumber(const unsigned short playerNumber) const
 	return -1;
 }
 
-Team::Team(const std::string& teamName, const std::string& coach, const std::string& stadium, double budget = 10000)
+Team::Team(const std::string& teamName, const std::string& coach, const std::string& stadium, double budget)
 {
 	setName(teamName);
 	setCoach(coach);
@@ -52,6 +52,11 @@ const std::string& Team::getStadium() const
 }
 
 const std::vector<Player>& Team::getPlayers() const
+{
+	return players;
+}
+
+std::vector<Player>& Team::getPlayers()
 {
 	return players;
 }
@@ -105,9 +110,10 @@ void Team::setBudget( const double budget)
 
 bool Team::addPlayer(const Player& player)
 {
-	if (players.size() < MAX_PLAYERS
-		&& player.getTransferFee() > budget
-		&& isTooSimilarPlayer(player))
+	if (players.size() > MAX_PLAYERS ||
+		player.getTransferFee() > budget ||
+		!canBuyPlayer(player) ||
+		isTooSimilarPlayer(player))
 	{
 		return false;
 	}
@@ -137,7 +143,9 @@ bool Team::removePlayer(const unsigned short playerNumber)
 		players.erase(players.begin() + playerIndx);
 		return true;
 	}
-	players.at(playerIndx).setPosition(oldPosition);
+	else {
+		players.at(playerIndx).setPosition(oldPosition);
+	}
 
 	return false;
 }

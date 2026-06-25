@@ -37,8 +37,7 @@ public:
 	void load(std::ifstream& in);
 	
 
-	bool addTeam(Team* team);
+	bool canAddTeam(Team* team);
 	void setAllRounds(const unsigned short allRounds);
 
 };
-

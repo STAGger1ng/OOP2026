@@ -27,7 +27,7 @@ public:
 	Team(const std::string& teamName,
 		 const std::string& coach,
 		 const std::string& stadium,
-		 double budget);
+		 double budget = 1000);
     virtual ~Team() = default;
 
     const std::string& getName() const;
@@ -35,6 +35,7 @@ public:
 	const std::string& getStadium() const;
 	double getBudget() const;
     const std::vector<Player>& getPlayers() const;
+    std::vector<Player>& getPlayers();
     const Player& getPlayerAtIndex( const unsigned index) const;
     Player* getPlayerAtIndex(const unsigned index);
     const TeamStats& getStats() const;
