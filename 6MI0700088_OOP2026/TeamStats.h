@@ -1,4 +1,6 @@
 #pragma once
+#include <fstream>
+
 struct TeamStats
 {
 private:
@@ -21,4 +23,7 @@ public:
     int getPoints() const;
 
     int goalDifference() const;
+
+    void save(std::ofstream& out) const;
+    void load(std::ifstream& in);
 };

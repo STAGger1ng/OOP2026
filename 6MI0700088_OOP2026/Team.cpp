@@ -220,6 +220,33 @@ void Team::updateAfterMatch(unsigned short scored, unsigned short conceded)
 	stats.updateAfterMatch(scored, conceded);
 }
 
+void Team::saveToFile(std::ofstream& out) const
+{
+	out << *this;
+	stats.save(out);
+}
+
+void Team::loadFromFile(std::ifstream& in)
+{
+	unsigned numPlayers;
+	in >> teamName >> coach >> stadium >> budget >> numPlayers;
+	if (numPlayers > MAX_PLAYERS)
+		numPlayers = MAX_PLAYERS;
+
+	players.clear();
+	for (unsigned i = 0; i < 5; ++i)
+		rolesDistribution[i] = 0;
+
+	for (unsigned i = 0; i < numPlayers; ++i)
+	{
+		Player player;
+		in >> player;
+		players.push_back(player);
+		rolesDistribution[static_cast<int>(player.getPosition())]++;
+	}
+	stats.load(in);
+}
+
 std::ostream& operator<<(std::ostream& os, const Team& t)
 {
 	os << t.teamName << " " << t.coach << " " << t.stadium << " " << t.budget << " " << t.players.size() << std::endl;

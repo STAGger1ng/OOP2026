@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <fstream>
 
 #include "Player.h"
 #include "TeamStats.h"
@@ -54,6 +55,9 @@ public:
     
     void startNewSeason();
     void updateAfterMatch(unsigned short scored, unsigned short conceded);
+
+    void saveToFile(std::ofstream& out) const;
+    void loadFromFile(std::ifstream& in);
     
     friend std::ostream& operator<<(std::ostream& os, const Team& t);
     friend std::istream& operator>>(std::istream& is, Team& t);

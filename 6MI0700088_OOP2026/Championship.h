@@ -1,5 +1,6 @@
 #pragma once
 
+#include <fstream>
 #include "Team.h"
 #include "BalancedTeam.h"
 #include "OffensiveTeam.h"
@@ -20,13 +21,19 @@ private:
 	std::vector<Match> matches;
 
 	void setYear();
+	std::vector<Team*> getSortedTeams() const;
 public:
 	Championship();
+	~Championship();
+	Championship(const Championship&) = delete;
+	Championship& operator=(const Championship&) = delete;
 	bool hasEnoughTeams() const;
 	void generateSchedule();
 	void playRound();
 	void playAllRounds();
 	void printTable() const;
+
+	const unsigned getYear() const;
 	Team* getChampion() const;
 	Team* getViceChampion() const;
 	Team* getThirdPlace() const;

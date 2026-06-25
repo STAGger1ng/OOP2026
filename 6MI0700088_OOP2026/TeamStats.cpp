@@ -2,14 +2,14 @@
 
 void TeamStats::updateAfterMatch(unsigned short scored, unsigned short recieved)
 {
-	goalsScored = scored;
-	goalsReceived = recieved;
-	if (goalsScored > goalsReceived)
+	goalsScored += scored;
+	goalsReceived += recieved;
+	if (scored > recieved)
 	{
 		wins++;
 		points += 3;
 	}
-	else if (goalsScored == goalsReceived)
+	else if (scored == recieved)
 	{
 		draws++;
 		points += 1;
@@ -22,7 +22,18 @@ void TeamStats::updateAfterMatch(unsigned short scored, unsigned short recieved)
 
 void TeamStats::resetForNewChamp()
 {
-	wins, draws, losses, points, goalsScored, goalsReceived = 0;
+	wins = draws = losses = points = goalsScored = goalsReceived = 0;
+}
+
+void TeamStats::save(std::ofstream& out) const
+{
+	out << wins << " " << draws << " " << losses << " "
+		<< goalsScored << " " << goalsReceived << " " << points << "\n";
+}
+
+void TeamStats::load(std::ifstream& in)
+{
+	in >> wins >> draws >> losses >> goalsScored >> goalsReceived >> points;
 }
 
 int TeamStats::getPoints() const
@@ -32,5 +43,5 @@ int TeamStats::getPoints() const
 
 int TeamStats::goalDifference() const
 {
-	return goalsScored-goalsReceived;
+	return goalsScored - goalsReceived;
 }
